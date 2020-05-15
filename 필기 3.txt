@@ -1,0 +1,97 @@
+모듈이 될 파일은
+module.exports = 값;
+을 마지막에 붙여주세요.
+
+변수뿐만 아니라, 함수 등도 다 가능
+
+모듈은 여러 번 재사용 가능
+
+module.exports === exports
+exports는 객체 속성만 담을 수 있음
+
+속성이 있는 것이 아니기 때문에
+exports.checkOddOrEven = checkOddOrEven; 이렇게 못씀
+(checkOddOrEven은 함수)
+
+불러오기
+const 변수 = require('파일 경로');
+
+const checkNumber = require('./func'); // checkOddOrEven 을 변수명을 바꿔서 사용
+
+
+<global>
+노드의 전역 객체는 global
+
+전역 객체이기 때문에 파일 간 global이 공유 가능
+
+<console>
+console 객체 안에 디버깅을 도와주는 많은 메서드가 있음
+
+console.time('인자')
+console.timeEnd('인자')
+인자가 같아야 그 사이의 시간을 잴 수 있음
+
+console.dir은 객체를 로깅하기 좋음
+
+console.trace()로 호출 스택을 추적할 수 있음
+
+<timer>
+setTimeout, setInterval로 설정
+clearTimeout, clearInterval로 해제
+
+setImmediate
+즉시 실행되는 setImmediate 함수를 이벤트 루프로 보낼 때 사용
+
+process 객체에는 현재 실행중인 노드 프로그램 정보가 들어있음
+
+---------------------------------------------------------------------------------------
+
+<os>
+
+운영체제와 관련된 모듈
+
+os.uptime : 운영체제가 시작되고 나서 흐른 시간
+
+<path>
+
+path.sep 경로 구분자
+windows(\\), POSIX(/)
+path.delimiter 환경 변수 구분자
+windows(;), POSIX(:)
+
+path.join 절대 경로 무시하고 합침 (절대 경로를 상대 경로로 여김)
+path.resolve 절대 경로 고려하고 합침
+
+루트는 C:\(윈도에서)
+
+<url>
+
+기존 방식 url.parse
+호스트가 없을 때도 사용 가능
+
+새방식 url.URL (WHATWG)
+search 처리가 편함 (url에서 ? 뒷 부분 )
+
+노드 searchParams 메서드는 FormData나 URLSearchParams 객체에도 비슷하게 쓰임
+
+같은 도메인 상에서는 도메인을 생략할 수 있는데, 이 때에는 WHATWG는 사용할 수 없고 url.parse만 사용가능
+
+<crypto 단방향 암호화 (해시)>
+
+비밀번호는 hash 방식으로 암호화해 복호화되지 않는 문자열을 만듦
+
+암호문(해시)을 저장한 후 사용자의 입력 비밀번호를 암호화한 것과 비교
+
+암호화만 하고 복호화하지 않기 때문에 단방향이라고 하는 것
+
+해시 충돌 공격을 어렵게 하기 위해 salt라는 문자열을 원래 비밀번호에 추가하고 iteration 횟수를 높임
+
+salt는 암호화된 비밀번호와 같이 저장하고, ieration은 1초 정도가 걸릴때까지 올려주면 좋음
+
+<crypto 양방향 암호화>
+
+createCipher
+utf8 평문을 base64 암호문으로
+
+createDecipher
+base64 암호문을 utf8 평문으로
